@@ -5,7 +5,7 @@
 <mapper namespace="cz.kohnh.moro.users.UserMapper">
 
     <resultMap id="UserResultMap" type="cz.kohnh.moro.users.User">
-        <id column="id" property="id"/>
+        <result column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="user_name" property="username"/>
         <result column="password" property="password"/>
@@ -15,14 +15,17 @@
         SELECT * FROM users WHERE id = #{id}
     </select>
 
-    <insert id="insertUser">
-        INSERT INTO users (name, username, password)
-        VALUES (#{name}, #{username}, #{password})
+    <insert id="insertUser" parameterType="map" keyProperty="user.id" keyColumn="id">
+    	<selectKey resultType="int" keyProperty="id" order="BEFORE" >
+        	SELECT NEXTVAL('users_id_seq')
+    	</selectKey>
+        INSERT INTO users (id, name, user_name, password)
+        VALUES (#{id}, #{name}, #{username}, #{password})
     </insert>
 
     <update id="updateUser">
         UPDATE users
-        SET name = #{name}, username = #{username}, password = #{password}
+        SET name = #{name}, user_name = #{username}, password = #{password}
         WHERE id = #{id}
     </update>
 
@@ -32,6 +35,10 @@
 
     <select id="selectAllUsers" resultMap="UserResultMap">
         SELECT * FROM users
+    </select>
+    
+    <select id="selectByUsername" resultMap="UserResultMap">
+        SELECT * FROM users WHERE user_name = #{username}
     </select>
 
 </mapper>

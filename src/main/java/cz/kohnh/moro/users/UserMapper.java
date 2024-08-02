@@ -6,9 +6,15 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface UserMapper {
-    User selectUserById(Long id);
-    void insertUser(User user);
-    void updateUser(User user);
-    void deleteUser(Long id);
-    List<User> selectAllUsers();
+	User selectUserById(int id);
+
+	void insertUser(User user);
+
+	void updateUser(User user);
+
+	void deleteUser(int id);
+
+	List<User> selectAllUsers();
+	
+	User selectByUsername(String username);
 }

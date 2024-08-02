@@ -1,10 +1,12 @@
 package cz.kohnh.moro.users;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class User {
-    private Long id;
+    private Integer id;
     private String name;
     private String username;
     private String password;
