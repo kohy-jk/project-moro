@@ -44,6 +44,11 @@ public class UserController {
 
 		@PutMapping("/{id}")
 		public ResponseEntity<ResponseUser> updateUser(@PathVariable int id, @Valid @RequestBody ResponseUser user) {
+			User userById = userService.getUserById(id);
+			if(userById == null) {
+				throw new RuntimeException("User with id="+id+" not exists");
+//				return ResponseEntity.notFound().build();
+			}
 			User u = user.toUser();
 			u.setId(id);
 			userService.updateUser(u);

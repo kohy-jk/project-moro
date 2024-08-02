@@ -1,5 +1,10 @@
 package cz.kohnh.moro.config;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -8,11 +13,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @ControllerAdvice
-public class ValidationExceptionHandler {
+public class ExceptionHandlers {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -24,5 +26,12 @@ public class ValidationExceptionHandler {
             errors.put(fieldName, errorMessage);
         });
         return ResponseEntity.badRequest().body(errors);
+    }
+    
+    @ExceptionHandler(Exception.class)
+    public final ResponseEntity<Map<String, String>> handleAllExceptions(Exception ex, HttpServletRequest rq) {
+    	Map<String, String> errors = new HashMap<>();
+      errors.put("errorMessage", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errors);
     }
 }
