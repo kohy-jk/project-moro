@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.validation.Valid;
 
+import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException.NotFound;
 
 import lombok.RequiredArgsConstructor;
 
@@ -43,11 +45,10 @@ public class UserController {
     }
 
 		@PutMapping("/{id}")
-		public ResponseEntity<ResponseUser> updateUser(@PathVariable int id, @Valid @RequestBody ResponseUser user) {
+		public ResponseEntity<ResponseUser> updateUser(@PathVariable int id, @Valid @RequestBody ResponseUser user) throws NotFoundException {
 			User userById = userService.getUserById(id);
 			if(userById == null) {
-				throw new RuntimeException("User with id="+id+" not exists");
-//				return ResponseEntity.notFound().build();
+				throw new NotFoundException("User with id="+id+" not exists");
 			}
 			User u = user.toUser();
 			u.setId(id);
