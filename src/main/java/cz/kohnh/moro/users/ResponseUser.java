@@ -20,12 +20,15 @@ public class ResponseUser {
 	@UniqueUsername
 	@NotBlank
   private String username;
+
+	private boolean filledPassword;
 	
 	
 	ResponseUser(User user){
 		this.id = user.getId();
 		this.name = user.getName();
 		this.username = user.getUsername();
+		this.filledPassword = user.getPassword()!=null;
 	}
 	
 	User toUser() {
