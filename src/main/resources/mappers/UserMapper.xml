@@ -20,12 +20,15 @@
         	SELECT NEXTVAL('users_id_seq')
     	</selectKey>
         INSERT INTO users (id, name, user_name, password)
-        VALUES (#{id}, #{name}, #{username}, #{password})
+        VALUES (#{id}, #{name}, #{username}, #{criptedPassword})
     </insert>
 
     <update id="updateUser">
         UPDATE users
-        SET name = #{name}, user_name = #{username}, password = #{password}
+        SET name = #{name}, user_name = #{username}
+        <if test="password != null">
+            , password = #{criptedPassword}
+        </if>
         WHERE id = #{id}
     </update>
 

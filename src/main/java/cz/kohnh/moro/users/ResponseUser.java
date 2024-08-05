@@ -1,9 +1,5 @@
 package cz.kohnh.moro.users;
 
-import jakarta.validation.constraints.NotBlank;
-
-import cz.kohnh.moro.validation.UniqueUsername;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,21 +10,16 @@ import lombok.Setter;
 public class ResponseUser {
 
 	private Integer id;
-	@NotBlank
-  private String name;
-	
-	@UniqueUsername
-	@NotBlank
-  private String username;
+	private String name;
+	private String username;
+	private String password;
 
-	private boolean filledPassword;
-	
 	
 	ResponseUser(User user){
 		this.id = user.getId();
 		this.name = user.getName();
 		this.username = user.getUsername();
-		this.filledPassword = user.getPassword()!=null;
+		this.password = "~~hidden~~";
 	}
 	
 	User toUser() {
@@ -36,6 +27,7 @@ public class ResponseUser {
 		u.setId(id);
 		u.setName(name);
 		u.setUsername(username);
+		u.setPassword(password);
 		return u;
 	}
 }
