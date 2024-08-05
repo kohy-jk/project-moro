@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "e7b42abe-0369-4e51-94cd-8fa5f9ed7395",
+		"name": "MORO - project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "37418853"
+	},
+	"item": [
+		{
+			"name": "get all",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"password": "heslo",
+						"username": "admin"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/users"
+			},
+			"response": []
+		},
+		{
+			"name": "insert",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"password": "heslo",
+						"username": "admin"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"name\": \"franta\",\r\n        \"username\": \"frantaaa\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/users"
+			},
+			"response": []
+		},
+		{
+			"name": "update",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"password": "Heslo",
+						"username": "userr"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"name\": \"Joseph\",\r\n        \"username\": \"pepe\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/users/3"
+			},
+			"response": []
+		},
+		{
+			"name": "get one",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"password": "heslo",
+						"username": "admin"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/users/2"
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"username": "pepppe",
+						"password": "Heslo"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8080/users/3"
+			},
+			"response": []
+		}
+	]
+}
